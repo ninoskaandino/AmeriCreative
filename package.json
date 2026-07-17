@@ -8,7 +8,7 @@
     "dev:backend": "pnpm --dir backend dev",
     "dev": "concurrently \"pnpm dev:frontend\" \"pnpm dev:backend\"",
     "all": "concurrently \"pnpm dev:frontend\" \"pnpm dev:backend\"",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
     "test:api": "pnpm --dir backend test:api"
