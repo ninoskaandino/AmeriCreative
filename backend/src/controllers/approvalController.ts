@@ -70,13 +70,7 @@ export const approvalController = {
           return res.status(404).json({ error: 'Imagen no encontrada.' });
         }
 
-        dbService.db.images = dbService.db.images.map(i => {
-          if (i.id === resourceId) {
-            i.approvalStatus = 'Aprobado';
-          }
-          return i;
-        });
-        dbService.save();
+        dbService.updateImage(resourceId, { approvalStatus: 'Aprobado' });
 
         const newApproval: Approval = {
           id: `app-${Date.now()}`,
@@ -156,13 +150,7 @@ export const approvalController = {
           return res.status(404).json({ error: 'Imagen no encontrada.' });
         }
 
-        dbService.db.images = dbService.db.images.map(i => {
-          if (i.id === resourceId) {
-            i.approvalStatus = 'Rechazado';
-          }
-          return i;
-        });
-        dbService.save();
+        dbService.updateImage(resourceId, { approvalStatus: 'Rechazado' });
 
         const newApproval: Approval = {
           id: `app-${Date.now()}`,
@@ -258,13 +246,7 @@ export const approvalController = {
           return res.status(404).json({ error: 'Imagen no encontrada.' });
         }
 
-        dbService.db.images = dbService.db.images.map(i => {
-          if (i.id === resourceId) {
-            i.approvalStatus = 'En revisión'; // remains in review
-          }
-          return i;
-        });
-        dbService.save();
+        dbService.updateImage(resourceId, { approvalStatus: 'En revisión' });
 
         const newApproval: Approval = {
           id: `app-${Date.now()}`,

@@ -321,7 +321,7 @@ class DatabaseService {
         tone: 'Tranquilizador',
         originalContent: '1. No escupir ni enjuagarse. 2. Ponerse hielo por fuera. 3. Tomar sus pastillas analgésicas. 4. Dieta blanda.',
         currentContent: '🦷 **Guía de Cuidados Posteriores a tu Colocación de Implante Dental Amerident**\n\nQuerido paciente: tu bienestar es nuestra prioridad. Para asegurar una cicatrización perfecta y sin molestias, por favor sigue con atención estas indicaciones durante las próximas 48 horas:\n\n1.❄️ **Aplicación de Frío:** Coloca una compresa fría en la zona externa de la mejilla durante 15 minutos, con intervalos de descanso de 15 minutos. Esto reducirá cualquier inflamación.\n2.💧 **Evita Enjuagues Fuertes:** No te enjuagues la boca ni escupas con fuerza hoy. Deja que los líquidos salgan con suavidad. Mañana podrás realizar enjuagues muy suaves con agua tibia y sal.\n3.🍲 **Nutrición Suave:** Mantén una dieta líquida o blanda a temperatura ambiente o fría (purés, batidos, gelatinas). Evita alimentos calientes, picantes o crujientes.\n4.💊 **Medicamentos:** Toma puntualmente los analgésicos y antibióticos recetados por tu cirujano de Amerident.\n\n*Nota Importante:* La IA generó esta guía informativa. Cualquier dolor agudo o sangrado abundante debe notificarse de inmediato a tu especialista de cabecera.',
-        status: 'Restaura versión',
+        status: 'Borrador',
         createdBy: 'u-writer',
         createdByName: 'Sebastián Ruiz',
         createdAt: new Date(Date.now() - 3600000 * 48).toISOString(),
@@ -477,6 +477,16 @@ class DatabaseService {
   public deleteImage(id: string) {
     this.db.images = this.db.images.filter(img => img.id !== id);
     this.save();
+  }
+
+  public updateImage(id: string, updates: Partial<GeneratedImage>) {
+    const idx = this.db.images.findIndex(img => img.id === id);
+    if (idx !== -1) {
+      this.db.images[idx] = { ...this.db.images[idx], ...updates };
+      this.save();
+      return this.db.images[idx];
+    }
+    return null;
   }
 
   public insertContent(doc: ContentDocument) {
