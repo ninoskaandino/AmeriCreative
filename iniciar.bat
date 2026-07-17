@@ -1,0 +1,6 @@
+@echo off
+echo Configurando variables de entorno...
+set PATH=C:\Program Files\nodejs;C:\Users\N.Andino\AppData\Roaming\npm;%PATH%
+echo Iniciando Ameri Creative Studio...
+pnpm run all
+pause
